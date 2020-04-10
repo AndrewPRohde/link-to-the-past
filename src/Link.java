@@ -1,11 +1,15 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Link {
     int x = 0;
-    int xa = 0;
     int y = 0;
+    private static final int WIDTH = 24;
+    private static final int HEIGHT = 32;
+    int xa = 0;
     int ya = 0;
+    int linkHealth = 3;
     private Main game;
 
     public Link(Main game) {
@@ -20,7 +24,7 @@ public class Link {
     }
 
     public void paint(Graphics2D g) {
-        g.fillRect(x, y, 24, 32);
+        g.fillRect(x, y, WIDTH, HEIGHT);
     }
 
     public void keyReleased(KeyEvent e) {
@@ -29,6 +33,7 @@ public class Link {
     }
 
     public void keyPressed(KeyEvent e) {
+        soundHandler.WALKGRASS.play();
         if (e.getKeyCode() == KeyEvent.VK_LEFT)
             xa = -1;
         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
@@ -37,6 +42,17 @@ public class Link {
             ya = -1;
         if (e.getKeyCode() == KeyEvent.VK_DOWN)
             ya = 1;
+    }
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
+    }
+    public int getTop() {
+        return y;
+    }
+    public void linkDamage() {
+        linkHealth -= 1;
+        if (linkHealth <= 0)
+            game.linkDeath();
     }
 
 }

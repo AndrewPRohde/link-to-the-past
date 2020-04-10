@@ -37,8 +37,14 @@ public class Main extends  JPanel {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        enemy.paint(g2d);
+        //enemy.paint(g2d);
         link.paint(g2d);
+    }
+
+    public void linkDeath() {
+        soundHandler.LINKDIES.play();
+        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+        System.exit(ABORT);
     }
 
     public static void main(String[] args) throws InterruptedException {
